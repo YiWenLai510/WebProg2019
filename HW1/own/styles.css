@@ -1,0 +1,45 @@
+body {
+    background-image: url(https://www.wpessentials.io/wp-content/uploads/2016/09/code_1080x400.jpg);
+    background-color: #cccccc;
+    font-family: Arial, Helvetica, sans-serif
+}
+.division{
+    margin:auto;
+    text-align: center;
+    width: 50%;
+    background-color: rgb(180, 240, 230);
+    border-radius: 25px;
+    padding: 20px; 
+  
+}
+.division1{
+    margin:auto;
+    width: 50%;
+    background-color: rgb(192, 238, 230);
+    border-radius: 25px;
+    padding: 20px; 
+  
+}
+.bold{
+    font-weight: bold
+}
+.mark {
+    background-color: yellow;
+    color: black;
+}
+.del {
+    text-decoration: line-through;
+}
+.search {
+    width:200px;
+    height: 40px;
+    margin:3px;
+    border-radius:15px; 
+    -moz-border-radius:15px; 
+    -webkit-border-radius:15px; 
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+  }
+.search:focus {
+    width: 50%;
+}
