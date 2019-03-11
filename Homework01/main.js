@@ -1,17 +1,14 @@
 var input = document.getElementById("todo-input");
 var todoList=[];
-//console.log(1);
 input.addEventListener("keyup", event => {
     if (event.keyCode === 13 && event.target.value !== '')  {
-    
-        //console.log(12);
+
         createTODOs(event,todoList,event.target.value);
-        //console.log(todoList);
+
     }
   });
-function onclickfunction(newItem,value){
-    node = document.getElementById(value);
-    
+function onclickfunction(newItem){
+    node = newItem.node.childNodes[1];
     if(newItem.isComplete == false){
         node.style.textDecoration = "line-through";
         node.style.opacity = 0.5;
@@ -22,7 +19,7 @@ function onclickfunction(newItem,value){
         node.style.opacity = 1;
         newItem.isComplete = false;
     }
-   //console.log(newItem.node);
+
    update_count();
 }
 function update_count(){
@@ -65,14 +62,20 @@ function clear_complete(){
     while (myNode.firstChild) {
         myNode.removeChild(myNode.firstChild);
     }
-    for(x = 0 ; x < todoList.length ; x++){
-        if(todoList[x].isComplete == true){
-            var pos = todoList.indexOf(todoList[x]);
-            todoList.splice(pos,1);
+    actList = todoList.filter(ele => ele.isComplete);
+    while(actList.length > 0){
+        for(z = 0 ; z < todoList.length ; z++){
+            if(todoList[z].isComplete == true){
+                var pos = todoList.indexOf(todoList[z]);
+                todoList.splice(pos,1);
+                break;
+            }
         }
+        actList = todoList.filter(ele => ele.isComplete);
     }
-    for(x = 0 ; x < todoList.length ; x++){
-        myNode.appendChild(todoList[x].node);
+    
+    for(l = 0 ; l < todoList.length ; l++){
+        myNode.appendChild(todoList[l].node);
     }
     
 }
@@ -82,11 +85,17 @@ function removeItemFrom_todoList(newItem,value){
     var node = document.getElementById(value)
     var this_root = node.parentNode;
     this_root.remove();
-
-    //console.log(todoList);
+    
+    var myNode = document.getElementById("todo-list");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.firstChild);
+    }
+    for(l = 0 ; l < todoList.length ; l++){
+        myNode.appendChild(todoList[l].node);
+    }
     update_count();
 
-    //console.log(this_root);
+
 }
 function createTODOs(e,todoList,value){
         
