@@ -1,4 +1,4 @@
-# **HomeWork01 Readme**
+# **HomeWork02 Readme**
 ## **功能說明**
 1. baseline Done
 2. 可出現柱子並隨機調整高度
