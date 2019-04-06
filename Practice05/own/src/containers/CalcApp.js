@@ -9,26 +9,27 @@ class CalcApp extends React.Component {
     this.state = {
       show_number : " ",
       operator : "nothing",
-      pending : 0
+      pending : 0,
+      buffer : 0
     };
   }
 
-  resetState = () => this.setState(() => ({show_number : " ", operator : "nothing", pending : 0}))
+  resetState = () => this.setState(() => ({show_number : " ", operator : "nothing", pending : 0, buffer : 0}))
 
   handleNumber(num){
     
     if(this.state.operator !== "nothing"){
       if(this.state.operator === "plus"){
-        this.setState(state =>({show_number:num, pending: state.pending+num}))
+        this.setState(state =>({show_number:num, pending: state.pending+num, buffer: num}))
       }
       else if(this.state.operator === "minus"){
-        this.setState(state =>({show_number:num, pending: state.pending-num}))
+        this.setState(state =>({show_number:num, pending: state.pending-num, buffer: num}))
       }
       else if(this.state.operator === "multiple"){
-        this.setState(state =>({show_number:num, pending: state.pending*num}))
+        this.setState(state =>({show_number:num, pending: state.pending*num, buffer: num}))
       }
       else{
-        this.setState(state =>({show_number:num, pending: state.pending/num}))
+        this.setState(state =>({show_number:num, pending: state.pending/num, buffer: num}))
       }
     }
     else{
@@ -46,7 +47,23 @@ class CalcApp extends React.Component {
       this.setState(state => ({show_number:state.pending, operator:oper}));
   } 
   handleEqual(){
-    this.setState(state =>({show_number:state.pending}));
+    if(this.state.show_number === this.state.pending && this.state.operator !== "nothing"){
+      if(this.state.operator === "plus"){
+        this.setState(state =>({show_number: state.show_number+state.buffer, pending: state.show_number+state.buffer}))
+      }
+      else if(this.state.operator === "minus"){
+        this.setState(state =>({show_number: state.show_number-state.buffer, pending: state.show_number-state.buffer}))
+      }
+      else if(this.state.operator === "multiple"){
+        this.setState(state =>({show_number: state.show_number*state.buffer, pending: state.show_number*state.buffer}))
+      }
+      else{
+        this.setState(state =>({show_number: state.show_number/state.buffer, pending: state.show_number/state.buffer}))
+      }
+    }
+    else{
+      this.setState(state =>({show_number:state.pending}));
+    }
   }
     // TODO
   
